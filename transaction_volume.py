@@ -6,9 +6,10 @@ import os
 flipside = Flipside("bee16fe2-eada-494f-b5a6-9589cf47ad9d", "https://api-v2.flipsidecrypto.xyz")
 
 sql = """
-SELECT COUNT(tx_hash) AS total_transaction_volume
+SELECT 
+    COUNT(tx_hash) AS transaction_volume
 FROM ETHEREUM.core.fact_transactions
-WHERE tx_succeeded = TRUE
+WHERE tx_succeeded = TRUE;
 """
 
 # Execute a consulta na Flipside
@@ -27,7 +28,7 @@ blockchain_data_path = os.getenv("blockchain_data_path")
 # Verificando se a variável de ambiente existe
 if blockchain_data_path:
     # Caminho completo para salvar o arquivo CSV
-    file_path = os.path.join(blockchain_data_path, "fact_transactions.csv")
+    file_path = os.path.join(blockchain_data_path, "transaction_volume.csv")
     
     # Exportando o DataFrame para CSV
     df.to_csv(file_path, index=False)
